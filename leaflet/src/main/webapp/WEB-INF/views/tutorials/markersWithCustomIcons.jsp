@@ -42,11 +42,11 @@
 			iconUrl: '/img/leaf-green.png',
 			shadowUrl: '/img/leaf-shadow.png',
 			
-			iconSize: [38, 95], // size of the icon
-			shadowSize: [50, 64], // size of the shadow
-			iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-			shadowAnchor: [4, 62],  // the same for the shadow
-			popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+			iconSize: [38, 95], // icon 사이즈
+			shadowSize: [50, 64], // shadow 사이즈
+			iconAnchor: [22, 94], // 마커 위치 기준 아이콘 지점
+			shadowAnchor: [4, 62],  // 마커 위치 기준 shadow 아이콘 지점
+			popupAnchor: [-3, -76] // 아이콘 기준 팝업 열리는 지점
 		});
 		
 		L.marker([37.566535, 126.9779692], {icon: greenIcon}).addTo(map); */
