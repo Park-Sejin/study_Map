@@ -20,7 +20,7 @@
 		<script src="/js/lib/jquery-3.7.0.min.js"></script>
 		
 		<style type="text/css">
-			#map { width:100%; height:95%; }
+			#map { width:100%; height:820px; }
 		</style>
 	</head>
 	<body>
@@ -47,7 +47,7 @@
 		var baseLayers = L.tileLayer.koreaProvider('DaumMap.Street').addTo(map);
 		
 		
-		/* // 마커 추가
+		// 마커 추가
 		var marker = L.marker([37.566535, 126.9779692]).addTo(map);
 		
 		// 원 추가
@@ -88,8 +88,7 @@
 			.openOn(map);
 		}
 	
-		map.on('click', onMapClick); */
+		map.on('click', onMapClick);
 	</script>
 	
-	<script src="/js/tutorials/quickStartGuideContent.js"></script>
 </html>
