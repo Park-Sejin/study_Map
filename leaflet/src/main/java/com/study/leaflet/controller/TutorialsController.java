@@ -10,11 +10,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TutorialsController{
 	
-	/** quick Start Guide 페이지 */
+	/** Quick Start Guide 페이지 */
 	@GetMapping("/tutorials/quickStartGuide.do")
 	public String quickStartGuide(){
 		
 		return "/tutorials/quickStartGuide";
+	}
+	
+	/** Markers With Custom Icons 페이지 */
+	@GetMapping("/tutorials/markersWithCustomIcons.do")
+	public String markersWithCustomIcons(){
+		
+		return "/tutorials/markersWithCustomIcons";
 	}
 	
 }
