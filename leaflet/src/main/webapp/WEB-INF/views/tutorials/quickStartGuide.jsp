@@ -50,6 +50,12 @@
 		// 마커 추가
 		var marker = L.marker([37.566535, 126.9779692]).addTo(map);
 		
+		var marker2 = L.marker([37.567535, 126.9779692],{alt: 'marker2'});
+			marker2.addTo(map).bindPopup('marker2, Ukraine is the birthplace of Leaflet!');
+		
+		var marker3 = L.marker([37.568535, 126.9779692],{alt: 'marker3', title : '마커3'});
+			marker3.addTo(map).bindPopup('marker3, Ukraine is the birthplace of Leaflet!');
+		
 		// 원 추가
 		var circle = L.circle([37.566535, 126.9779692], {
 			color: 'red', // 외곽선 색상
