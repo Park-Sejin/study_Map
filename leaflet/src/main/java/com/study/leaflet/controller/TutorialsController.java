@@ -24,4 +24,11 @@ public class TutorialsController{
 		return "/tutorials/markersWithCustomIcons";
 	}
 	
+	/** Using GeoJSON with Leaflet 페이지 */
+	@GetMapping("/tutorials/usingGeoJSONwithLeaflet.do")
+	public String usingGeoJSONwithLeaflet(){
+		
+		return "/tutorials/usingGeoJSONwithLeaflet";
+	}
+	
 }
