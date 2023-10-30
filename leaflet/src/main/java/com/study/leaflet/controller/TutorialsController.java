@@ -31,4 +31,11 @@ public class TutorialsController{
 		return "/tutorials/usingGeoJSONwithLeaflet";
 	}
 	
+	/** Interactive Choropleth Map 페이지 */
+	@GetMapping("/tutorials/interactiveChoroplethMap.do")
+	public String interactiveChoroplethMap(){
+		
+		return "/tutorials/interactiveChoroplethMap";
+	}
+	
 }
