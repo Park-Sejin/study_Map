@@ -22,6 +22,19 @@
 		
 		<style type="text/css">
 			#map { width:100%; height:820px; }
+			
+			.info {
+				padding: 6px 8px;
+				font: 14px/16px Arial, Helvetica, sans-serif;
+				background: white;
+				background: rgba(255,255,255,0.8);
+				box-shadow: 0 0 15px rgba(0,0,0,0.2);
+				border-radius: 5px;
+			}
+			.info h4 {
+				margin: 0 0 5px;
+				color: #777;
+			}
 		</style>
 	</head>
 	<body>
@@ -64,7 +77,106 @@
 			};
 		}
 		
-		L.geoJson(statesData, {style: style}).addTo(map);
+		//L.geoJson(statesData, {style: style}).addTo(map);
+		
+		
+		// 상호작용
+		/* // mouseover
+		function highlightFeature(e) {
+			var layer = e.target;
+			
+			layer.setStyle({
+				weight: 5,
+				color: '#666',
+				dashArray: '',
+				fillOpacity: 0.7
+			});
+			
+			layer.bringToFront();
+		}
+		
+		// mouseout
+		function resetHighlight(e) {
+			geojson.resetStyle(e.target);
+		}
+		
+		// click
+		function zoomToFeature(e) {
+			map.fitBounds(e.target.getBounds());
+		}
+		
+		function onEachFeature(feature, layer) {
+			layer.on({
+				mouseover: highlightFeature,
+				mouseout: resetHighlight,
+				click: zoomToFeature
+			});
+		}
+		
+		// 레이어 리스너 추가
+		geojson = L.geoJson(statesData, {
+			style: style,
+			onEachFeature: onEachFeature
+		}).addTo(map); */
+		
+		
+		// 사용자 정의 정보 제어
+		var info = L.control();
+
+		info.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+			this.update();
+			return this._div;
+		};
+		
+		// method that we will use to update the control based on feature properties passed
+		info.update = function (props) {
+			this._div.innerHTML = '<h4>US Population Density</h4>' + 
+				((props)? '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>' : 'Hover over a state');
+		};
+		
+		info.addTo(map);
+		
+		// mouseover
+		function highlightFeature(e) {
+			var layer = e.target;
+			
+			layer.setStyle({
+				weight: 5,
+				color: '#666',
+				dashArray: '',
+				fillOpacity: 0.7
+			});
+			
+			layer.bringToFront();
+			info.update(layer.feature.properties); // 추가
+		}
+		
+		// mouseout
+		function resetHighlight(e) {
+			geojson.resetStyle(e.target);
+			info.update(); // 추가
+		}
+		
+		// click
+		function zoomToFeature(e) {
+			map.fitBounds(e.target.getBounds());
+		}
+		
+		function onEachFeature(feature, layer) {
+			layer.on({
+				mouseover: highlightFeature,
+				mouseout: resetHighlight,
+				click: zoomToFeature
+			});
+		}
+		
+		// 레이어 리스너 추가
+		geojson = L.geoJson(statesData, {
+			style: style,
+			onEachFeature: onEachFeature
+		}).addTo(map);
+		
 	</script>
 	
 </html>
