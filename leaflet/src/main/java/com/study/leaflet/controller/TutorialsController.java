@@ -38,4 +38,11 @@ public class TutorialsController{
 		return "/tutorials/interactiveChoroplethMap";
 	}
 	
+	/** Layer Groups and Layers Control 페이지 */
+	@GetMapping("/tutorials/layerGroupsAndLayersControl.do")
+	public String layerGroupsAndLayersControl(){
+		
+		return "/tutorials/layerGroupsAndLayersControl";
+	}
+	
 }
