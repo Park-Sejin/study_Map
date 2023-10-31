@@ -41,12 +41,12 @@
 		
 		
 		// 레이어 그룹
-		var littleton = L.marker([37.566535, 126.9779692]).bindPopup('This is Littleton, CO.');
-		var denver = L.marker([37.567535, 126.9779692]).bindPopup('This is Denver, CO.');
-		var aurora = L.marker([37.568535, 126.9779692]).bindPopup('This is Aurora, CO.');
-		var golden = L.marker([37.569535, 126.9779692]).bindPopup('This is Golden, CO.');
+		var one = L.marker([37.566535, 126.9779692]).bindPopup('This is One, CO.');
+		var two = L.marker([37.567535, 126.9779692]).bindPopup('This is Two, CO.');
+		var three = L.marker([37.568535, 126.9779692]).bindPopup('This is Three, CO.');
+		var four = L.marker([37.569535, 126.9779692]).bindPopup('This is Four, CO.');
 		
-		var cities = L.layerGroup([littleton, denver, aurora, golden]);
+		var cities = L.layerGroup([one, two, three, four]);
 		
 		
 		// 레이어 제어
@@ -79,10 +79,10 @@
 		var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 		
 		// 레이어, 오버레이 추가
-		var cityHall = L.marker([37.566535, 126.9789692]).bindPopup('This is City Hall.');
-		var cityHall2 = L.marker([37.566535, 126.9799692]).bindPopup('This is City Hall near');
+		var five = L.marker([37.566535, 126.9789692]).bindPopup('This is Five.');
+		var six = L.marker([37.566535, 126.9799692]).bindPopup('This is Six');
 			
-		var cityPlaces = L.layerGroup([cityHall, cityHall2]);
+		var cityPlaces = L.layerGroup([five, six]);
 		var openTopoMap = L.tileLayer.koreaProvider('DaumMap.Street', {
 			attribution : "openTopoMap layer"
 		});
