@@ -35,6 +35,18 @@
 				margin: 0 0 5px;
 				color: #777;
 			}
+			
+			.legend {
+				line-height: 18px;
+				color: #555;
+			}
+			.legend i {
+				width: 18px;
+				height: 18px;
+				float: left;
+				margin-right: 8px;
+				opacity: 0.7;
+			}
 		</style>
 	</head>
 	<body>
@@ -124,7 +136,7 @@
 		var info = L.control();
 
 		info.onAdd = function (map) {
-			this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+			this._div = L.DomUtil.create('div', 'info');
 			this.update();
 			return this._div;
 		};
@@ -132,7 +144,7 @@
 		// method that we will use to update the control based on feature properties passed
 		info.update = function (props) {
 			this._div.innerHTML = '<h4>US Population Density</h4>' + 
-				((props)? '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>' : 'Hover over a state');
+				((props)? '<b>' + props.SIG_KOR_NM + '</b><br />' + props.SIG_CD : 'Hover over a state');
 		};
 		
 		info.addTo(map);
@@ -176,6 +188,27 @@
 			style: style,
 			onEachFeature: onEachFeature
 		}).addTo(map);
+		
+		
+		// 사용자 정의 범례 컨트롤
+		var legend = L.control({position: 'bottomright'});
+
+		legend.onAdd = function (map) {
+			var div = L.DomUtil.create('div', 'info legend'),
+				grades = [0, 11, 28, 30, 40, 43, 45, 50],
+				labels = [];
+		
+			// loop through our density intervals and generate a label with a colored square for each interval
+			for (var i = 0; i < grades.length; i++) {
+				div.innerHTML +=
+					'<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+					grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+			}
+		
+			return div;
+		};
+		
+		legend.addTo(map);
 		
 	</script>
 	
