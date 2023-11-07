@@ -25,10 +25,24 @@ public class MapController{
 	}
 	
 	/** 지도타입 변경 페이지 */
-	@GetMapping("/map/MapTypeChange.do")
-	public String MapTypeChange(){
+	@GetMapping("/map/mapTypeChange.do")
+	public String mapTypeChange(){
 		
-		return "/kakao/map/MapTypeChange";
+		return "/kakao/map/mapTypeChange";
+	}
+	
+	/** 지도 범위 및 영역크기 재설정 페이지 */
+	@GetMapping("/map/scopeAndAreaSizeChange.do")
+	public String scopeAndAreaSizeChange(){
+		
+		return "/kakao/map/scopeAndAreaSizeChange";
+	}
+	
+	/** 이벤트 등록 페이지 */
+	@GetMapping("/map/mapEventListener.do")
+	public String mapEventListener(){
+		
+		return "/kakao/map/mapEventListener";
 	}
 	
 }
