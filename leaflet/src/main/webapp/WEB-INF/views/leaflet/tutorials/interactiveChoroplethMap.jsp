@@ -16,7 +16,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.9.1/proj4.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4leaflet/1.0.2/proj4leaflet.min.js"></script>
 		<script src="/js/lib/Leaflet.KoreanTmsProviders.js"></script>
-		<script src="/js/tutorials/TL_SCCO_SIG.js"></script>
+		<script src="/js/leaflet/tutorials/TL_SCCO_SIG.js"></script>
 		
 		<script src="/js/lib/jquery-3.7.0.min.js"></script>
 		
