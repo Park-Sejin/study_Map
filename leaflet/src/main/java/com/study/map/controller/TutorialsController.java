@@ -1,4 +1,4 @@
-package com.study.leaflet.controller;
+package com.study.map.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
