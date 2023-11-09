@@ -24,4 +24,11 @@ public class OverlayController{
 		return "/kakao/overlay/createInfoWindow";
 	}
 	
+	/** 여러개 마커 생성 페이지 */
+	@GetMapping("/overlay/createMultipleMarker.do")
+	public String createMultipleMarker(){
+		
+		return "/kakao/overlay/createMultipleMarker";
+	}
+	
 }
