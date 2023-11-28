@@ -31,4 +31,11 @@ public class OverlayController{
 		return "/kakao/overlay/createMultipleMarker";
 	}
 	
+	/** 다양한 이미지 마커 표시 페이지 */
+	@GetMapping("/overlay/createImageMarker.do")
+	public String createImageMarker(){
+		
+		return "/kakao/overlay/createImageMarker";
+	}
+	
 }
