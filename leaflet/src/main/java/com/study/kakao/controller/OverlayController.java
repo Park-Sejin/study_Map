@@ -38,4 +38,11 @@ public class OverlayController{
 		return "/kakao/overlay/createImageMarker";
 	}
 	
+	/** 원, 선, 사각형, 다각형 표시 페이지 */
+	@GetMapping("/overlay/createShape.do")
+	public String createShape(){
+		
+		return "/kakao/overlay/createShape";
+	}
+	
 }
