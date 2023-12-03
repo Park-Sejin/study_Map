@@ -66,4 +66,11 @@ public class OverlayController{
 		return "/kakao/overlay/createPolygonAndEvent";
 	}
 	
+	/** 마우스로 원 그리기 및 반경 계산 페이지 */
+	@GetMapping("/overlay/createCircleAndRadius.do")
+	public String createCircleAndRadius(){
+		
+		return "/kakao/overlay/createCircleAndRadius";
+	}
+	
 }
