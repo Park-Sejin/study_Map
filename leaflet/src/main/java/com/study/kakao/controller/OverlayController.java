@@ -59,4 +59,11 @@ public class OverlayController{
 		return "/kakao/overlay/createPolygonAndArea";
 	}
 	
+	/** 다각형 이벤트 등록 페이지 */
+	@GetMapping("/overlay/createPolygonAndEvent.do")
+	public String createPolygonAndEvent(){
+		
+		return "/kakao/overlay/createPolygonAndEvent";
+	}
+	
 }
