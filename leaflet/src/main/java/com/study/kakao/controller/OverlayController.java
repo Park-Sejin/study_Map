@@ -45,11 +45,18 @@ public class OverlayController{
 		return "/kakao/overlay/createShape";
 	}
 	
-	/** 마우스로 도형 그리기 및 면적 계산 페이지 */
-	@GetMapping("/overlay/createShapeAndAreaCalcul.do")
+	/** 마우스로 선 그리기 및 거리 계산 페이지 */
+	@GetMapping("/overlay/createLineAndDistance.do")
 	public String createShapeAndAreaCalcul(){
 		
-		return "/kakao/overlay/createShapeAndAreaCalcul";
+		return "/kakao/overlay/createLineAndDistance";
+	}
+	
+	/** 마우스로 다각형 그리기 및 면적 계산 페이지 */
+	@GetMapping("/overlay/createPolygonAndArea.do")
+	public String createPolygonAndArea(){
+		
+		return "/kakao/overlay/createPolygonAndArea";
 	}
 	
 }
