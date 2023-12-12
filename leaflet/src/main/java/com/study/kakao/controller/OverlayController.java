@@ -73,4 +73,11 @@ public class OverlayController{
 		return "/kakao/overlay/createCircleAndRadius";
 	}
 	
+	/** 커스텀 오버레이 생성 페이지 */
+	@GetMapping("/overlay/createCustomOverlay.do")
+	public String createCustomOverlay(){
+		
+		return "/kakao/overlay/createCustomOverlay";
+	}
+	
 }
