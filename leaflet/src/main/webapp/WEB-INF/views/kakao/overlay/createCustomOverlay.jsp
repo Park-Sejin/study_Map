@@ -58,12 +58,29 @@
 			.info .link {color: #5085BB;}
 			 */
 			
+			/* 
 			.customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
 			.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
 			.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #d95050;background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
 			.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
 			.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-						
+			 */
+			
+			.overlay {
+				position:absolute;
+				left: -50px;
+				top:0;
+				width:100px;
+				height: 100px;
+				background: #fff;
+				border:1px solid #ccc;
+				border-radius: 5px;
+				padding:5px;
+				font-size:12px;
+				text-align: center;
+				white-space: pre;
+				word-wrap: break-word;
+			}
 			
 		</style>
 	</head>
@@ -192,6 +209,7 @@
 		}
 		 */
 		
+		/* 
 		// 이미지 마커와 커스텀 오버레이
 		var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지 주소
 			imageSize = new kakao.maps.Size(64, 69), // 마커이미지 크기
@@ -219,6 +237,100 @@
 			content: content,
 			yAnchor: 1 
 		});
+		 */
+		
+		// 커스텀 오버레이 드레그
+		// 커스텀 오버레이 생성
+		var content = document.createElement('div');
+		content.className = 'overlay';
+		content.innerHTML = '드래그 해주세요 :D';
+		
+		var customoverlay = new kakao.maps.CustomOverlay({
+			map: map,
+			content: content,
+			position: new kakao.maps.LatLng(33.450701, 126.570667)
+		});
+		
+		var startX, startY, startOverlayPoint; // 드래그 시작좌표, 커스텀 오버레이의 위치좌표
+		
+		// mousedown 이벤트
+		addEventHandle(content, 'mousedown', onMouseDown);
+		
+		// mouseup 이벤트
+		addEventHandle(document, 'mouseup', onMouseUp);
+		
+		// mousedown 호출 핸들러
+		function onMouseDown(e) {
+			// 커스텀 오버레이를 드래그 할 때, 내부 텍스트가 영역 선택되는 현상을 막아줌
+			if (e.preventDefault) {
+				e.preventDefault();
+			} else {
+				e.returnValue = false;
+			}
+			
+			var proj = map.getProjection(); // 화면픽셀좌표, 지도좌표간 변환을 위한 MapProjection 객체
+			var overlayPos = customoverlay.getPosition(); // 커스텀 오버레이의 현재 위치
+		
+			// 커스텀오버레이에서 마우스 관련 이벤트가 발생해도 지도가 움직이지 않도록 설정
+			kakao.maps.event.preventMap();
+		
+			// mousedown된 좌표를 설정
+			startX = e.clientX;
+			startY = e.clientY;
+		
+			// mousedown됐을 때의 커스텀 오버레이의 좌표 -> 지도 컨테이너내 픽셀 좌표로 변환
+			startOverlayPoint = proj.containerPointFromCoords(overlayPos);
+		
+			// mousemove 이벤트 등록
+			addEventHandle(document, 'mousemove', onMouseMove);
+		}
+		
+		// mousemove 호출 핸들러
+		function onMouseMove(e) {
+			// 커스텀 오버레이를 드래그 할 때, 내부 텍스트가 영역 선택되는 현상을 막아줌
+			if (e.preventDefault) {
+				e.preventDefault();
+			} else {
+				e.returnValue = false;
+			}
+			
+			var proj = map.getProjection(); // 화면픽셀좌표, 지도좌표간 변환을 위한 MapProjection 객체
+			var deltaX = startX - e.clientX; // 실제로 마우스가 이동된 픽셀좌표 (mousedown한 좌표 - mousemove한 좌표)
+			var deltaY = startY - e.clientY;
+			
+			// mousedown됐을 때의 커스텀 오버레이의 좌표에 실제로 마우스가 이동된 픽셀좌표를 반영
+			var newPoint = new kakao.maps.Point(startOverlayPoint.x - deltaX, startOverlayPoint.y - deltaY); 
+			// 계산된 픽셀 좌표를 지도 컨테이너에 해당하는 지도 좌표로 변경
+			var newPos = proj.coordsFromContainerPoint(newPoint);
+		
+			// 커스텀 오버레이의 좌표를 설정
+			customoverlay.setPosition(newPos);
+		}
+		
+		// mouseu 호출 핸들러
+		function onMouseUp(e) {
+			// 등록된 mousemove 이벤트 핸들러 제거
+			removeEventHandle(document, 'mousemove', onMouseMove);
+		}
+		
+		// target node에 이벤트 핸들러를 등록하는 함수
+		function addEventHandle(target, type, callback) {
+			if (target.addEventListener) {
+				target.addEventListener(type, callback);
+			} else {
+				target.attachEvent('on' + type, callback);
+			}
+		}
+		
+		// target node에 등록된 이벤트 핸들러를 제거하는 함수
+		function removeEventHandle(target, type, callback) {
+			if (target.removeEventListener) {
+				target.removeEventListener(type, callback);
+			} else {
+				target.detachEvent('on' + type, callback);
+			}
+		}
+		
 	</script>
 	
 </html>
