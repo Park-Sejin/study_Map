@@ -54,18 +54,18 @@
 		<div id="map" style="width:100%;height:800px;"></div>
 		
 		<div id="menu_wrap" class="bg_white">
-		<div class="option">
-			<div>
-				<form onsubmit="searchPlaces(); return false;">
-					키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
-					<button type="submit">검색하기</button> 
-				</form>
+			<div class="option">
+				<div>
+					<form onsubmit="searchPlaces(); return false;">
+						키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
+						<button type="submit">검색하기</button> 
+					</form>
+				</div>
 			</div>
+			<hr>
+			<ul id="placesList"></ul>
+			<div id="pagination"></div>
 		</div>
-		<hr>
-		<ul id="placesList"></ul>
-		<div id="pagination"></div>
-	</div>
 	</body>
 	
 	<script type="text/javascript">
@@ -83,7 +83,7 @@
 		
 		/* 
 		// 키워드로 장소 검색
-		// 마커를 클릭 시 장소명을 표출할 인포윈도우
+		// 마커 클릭 시 장소명을 표출할 인포윈도우
 		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 		
 		// 장소 검색 객체 생성

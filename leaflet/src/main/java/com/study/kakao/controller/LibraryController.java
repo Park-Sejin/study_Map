@@ -17,4 +17,11 @@ public class LibraryController{
 		return "/kakao/library/searchKeyword";
 	}
 	
+	/** 카테고리로 장소 검색 페이지 */
+	@GetMapping("/library/searchCategory.do")
+	public String searchCategory(){
+		
+		return "/kakao/library/searchCategory";
+	}
+	
 }
