@@ -127,39 +127,32 @@
 		 */
 		
 		// 카테고리로 장소검색 후 마커 표출
-		// 마커 클릭 시 상세정보 커스텀오버레이
-		var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
-			contentNode = document.createElement('div'), // 커스텀 오버레이의 엘리먼트
-			markers = [], // 마커 배열
-			currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수
+		// 마커 클릭 시 장소의 상세정보를 표출할 커스텀오버레이 및 엘리먼트
+		var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1});
+		var contentNode = document.createElement('div');
+		
+		// 커스텀 오버레이에 css class 추가 및 컨텐츠 설정
+		contentNode.className = 'placeinfo_wrap';
+		placeOverlay.setContent(contentNode);
+		
+		// 마커 담을 배열
+		var markers = [];
+		
+		// 현재 선택된 카테고리
+		var currCategory = '';
 		
 		// 장소 검색 객체 생성
 		var ps = new kakao.maps.services.Places(map); 
-		
-		// 지도에 idle 이벤트 등록
-		kakao.maps.event.addListener(map, 'idle', searchPlaces);
 		
 		// 커스텀 오버레이에 mousedown, touchstart 이벤트가 발생했을 때, 지도 객체에 이벤트가 전달되지 않도록 함
 		addEventHandle(contentNode, 'mousedown');
 		addEventHandle(contentNode, 'touchstart');
 		
-		// 커스텀 오버레이에 css class 추가
-		contentNode.className = 'placeinfo_wrap';
-		
-		// 커스텀 오버레이 컨텐츠 설정
-		placeOverlay.setContent(contentNode);
-		
 		// 각 카테고리에 클릭 이벤트 등록
 		addCategoryClickEvent();
 		
-		// 엘리먼트에 이벤트 핸들러로 kakao.maps.event.preventMap 이벤트 등록하는 함수
-		function addEventHandle(target, type) {
-			if (target.addEventListener) {
-				target.addEventListener(type, kakao.maps.event.preventMap);
-			} else {
-				target.attachEvent('on' + type, kakao.maps.event.preventMap);
-			}
-		}
+		// 지도에 idle 이벤트 등록 ( 중심 좌표나 확대 수준이 변경되면 발생함 )
+		kakao.maps.event.addListener(map, 'idle', searchPlaces);
 		
 		// 카테고리 검색을 요청하는 함수
 		function searchPlaces() {
@@ -176,7 +169,7 @@
 			ps.categorySearch(currCategory, placesSearchCallBack, {useMapBounds:true});
 		}
 		
-		// 장소검색이 완료됐을 때 호출되는 콜백함수
+		// 장소검색 완료 콜백함수
 		function placesSearchCallBack(data, status, pagination) {
 			// 정상 검색
 			if (status == kakao.maps.services.Status.OK) {
@@ -262,6 +255,25 @@
 			placeOverlay.setMap(map);  
 		}
 		
+		// 엘리먼트에 이벤트 핸들러로 kakao.maps.event.preventMap 이벤트 등록하는 함수
+		function addEventHandle(target, type) {
+			if (target.addEventListener) {
+				target.addEventListener(type, kakao.maps.event.preventMap);
+			} else {
+				target.attachEvent('on' + type, kakao.maps.event.preventMap);
+			}
+		}
+		
+		// 각 카테고리에 클릭 이벤트 등록하는 함수
+		function addCategoryClickEvent() {
+			var category = document.getElementById('category'),
+				children = category.children;
+			
+			for(var i=0; i<children.length; i++) {
+				children[i].onclick = onClickCategory;
+			}
+		}
+		
 		// 카테고리를 클릭했을 때 호출되는 함수
 		function onClickCategory() {
 			var id = this.id;
@@ -277,16 +289,6 @@
 				currCategory = id;
 				changeCategoryClass(this);
 				searchPlaces();
-			}
-		}
-		
-		// 각 카테고리에 클릭 이벤트 등록하는 함수
-		function addCategoryClickEvent() {
-			var category = document.getElementById('category'),
-				children = category.children;
-			
-			for(var i=0; i<children.length; i++) {
-				children[i].onclick = onClickCategory;
 			}
 		}
 		
