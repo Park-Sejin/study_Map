@@ -24,4 +24,11 @@ public class LibraryController{
 		return "/kakao/library/searchCategory";
 	}
 	
+	/** 주소로 장소 표시 페이지 */
+	@GetMapping("/library/addrCoordinate.do")
+	public String addrCoordinate(){
+		
+		return "/kakao/library/addrCoordinate";
+	}
+	
 }
