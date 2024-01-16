@@ -37,7 +37,7 @@
 		// 주소-좌표 변환 객체 생성
 		var geocoder = new kakao.maps.services.Geocoder();
 		
-		// 주소로 좌표를 검색합니다
+		// 주소로 좌표 검색
 		geocoder.addressSearch('서울특별시 중구 세종대로 110', function(result, status) {
 			// 정상 검색
 			if (status == kakao.maps.services.Status.OK) {
